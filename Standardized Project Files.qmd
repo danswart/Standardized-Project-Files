@@ -1,0 +1,689 @@
+---
+title: "Standardized Project Files"
+subtitle: ""
+description: ""
+author: 
+  - name: "Dan Swart, CPA (ret)"
+    affiliations:
+      - "SCUC-ISD Board of Trustees"
+      - "Seat 6"
+date: today
+date-format: long
+# bibliography: manual-refs.bib
+format:
+  html:
+    resources:
+      - reference-backlinks.js
+    include-after-body:    
+      - text: |
+          # <script type="text/javascript" src="reference-backlinks.js"></script>
+    default: true         
+    code-copy: true
+    code-link: true        # This adds individual buttons
+    code-fold: true        # Hide code by default, show on click
+    code-summary: "Show the code"
+    code-overflow: wrap
+    code-block-bg: "#FAEBD7"
+    code-block-border-left: "#31BAE9"
+    embed-resources: true
+    include-in-header: header.html
+    css:
+      - swart.css
+      - tachyons.min.css
+      - r-colors.css
+    fontsize: 18pt
+    lightbox: true
+    page-layout: full
+    fig-width: 12
+    fig-height: 10
+    fig-dpi: 300
+    html-math-method: katex
+    df-print: paged
+    toc: true
+    toc-float: true
+    citeproc: true
+    link-citations: true
+    linestretch: 1.0
+    
+    
+    
+  typst:
+    fig-width: 12
+    fig-height: 10
+    fig-dpi: 300
+    margin:
+      x: 1in
+      y: 1in
+    toc: true
+    fontsize: 14pt
+    mainfont: "Cabin"
+    
+  revealjs:
+    slide-number: true
+    transition: fade
+    code-overflow: wrap
+    center: true
+    smaller: true
+    scrollable: true
+    chalkboard: true
+    multiplex: false
+    theme: solarized
+    reference-location: margin
+    logo: img/red-cross-640-435.png
+    footer: "Footer text"
+    code-block-height: 650px
+
+
+
+  # docx:
+  #   highlight-style: github
+  #   fig_caption: true
+
+
+
+editor: source
+
+quarto:
+  render:
+    cache-refresh: true
+
+
+# for .qmd filesd
+execute:
+  echo: true
+  message: false
+  warning: false
+  eval: true
+  fig-width: 12
+  fig-height: 10
+
+
+# for .rmd files
+knitr:
+  opts_chunk:
+    echo: true
+    error: false
+    warning: false
+    message: false
+    cache: false
+
+---
+
+
+```{r}
+#| label: setup
+#| include: false
+
+# Prevent scientific notation globally
+options(scipen = 999)
+
+options(tigris_use_cache = TRUE)
+
+# install.packages(c("mapview", "survey", "srvyr", "arcgislayers"))
+
+# census_api_key("95496766c51541ee6f402c1e1a8658581285b759", install = TRUE, overwrite = TRUE)
+
+
+# load libraries
+
+# library(readxl)
+# library(writexl) 
+# library(tidyr) 
+# library(readr) 
+# library(purrr) 
+# library(stringr) 
+# library(forcats) 
+# library(lubridate) 
+# library(janitor) 
+# library(ggtext) 
+# library(paletteer) 
+# library(viridis) 
+# library(RColorBrewer) 
+# library(wesanderson) 
+# library(dutchmasters) 
+# library(gghighlight) 
+# library(monochromeR) 
+# library(ggforce) 
+# library(ggthemes)
+# library(gt)
+# library(gtExtras)
+# library(tidyverse)
+# library(plotly)
+# library(ggplot2)
+# library(tibble)
+# library(patchwork)
+# library(ppcor)
+# library(ggplot2)
+# library(corrplot)
+# library(ggcorrplot)
+# library(car)
+# library(WRS2)
+# library(boot)
+# library(BayesFactor)
+# library(pwr)
+# library(qgraph)
+# library(scales)
+# library(here)
+# library(ggdag)      # For plotting DAGs
+# library(dagitty)    # For working with DAG logic
+# library(DiagrammeR) # For complete control of the layout
+# library(knitr)      # For controlling rendering
+# library(kableExtra) # For tables summarizing results
+# library(DT)         # For rendering content that kableExtra cannot (symbols)
+# library(lavaan)     # For latent variable analysis
+# library(ggpubr)
+# library(rethinking)
+# library(broom)
+
+library(tidyverse)
+library(tidycensus)
+
+
+# Force dplyr's select to take precedence
+select <- dplyr::select
+filter <- dplyr::filter
+
+# Set global theme for consistent plots
+theme_set(theme_minimal(base_size = 20) + 
+          theme(
+    plot.title = element_text(face = "bold", size = 26),    # adjust title size
+    plot.subtitle = element_text(face = "bold", size = 24), # adjust subtitle size
+    axis.title.x = element_text(face = "bold", size = 22),
+    axis.title.y = element_text(face = "bold", size = 22),
+    axis.text.x = element_text(face = "bold", size = 22, angle = 45, hjust = 1),
+    legend.position = "bottom",
+    strip.text = element_text(face = "bold"),
+    panel.spacing.x = unit(1.5, "cm"),  # Horizontal spacing only
+    panel.spacing.y = unit(1.5, "cm"),   # Vertical spacing only
+    plot.margin = margin(20, 20, 20, 20, "pt")
+    )
+)
+
+
+# Set seed for reproducibility
+set.seed(123)
+
+```
+
+## Quarto YAML
+
+
+```markdown
+
+title: "Standardize Your Project Files"
+subtitle: ""
+description: ""
+author: 
+  - name: "Dan Swart, CPA (ret)"
+    affiliations:
+      - "SCUC-ISD Board of Trustees"
+      - "Seat 6"
+date: today
+date-format: long
+# bibliography: manual-refs.bib
+format:
+  html:
+    resources:
+      - reference-backlinks.js
+    include-after-body:    
+      - text: |
+          # <script type="text/javascript" src="reference-backlinks.js"></script>
+    default: true         
+    code-copy: true
+    code-link: true        # This adds individual buttons
+    code-fold: true        # Hide code by default, show on click
+    code-summary: "Show the code"
+    code-overflow: wrap
+    code-block-bg: "#FAEBD7"
+    code-block-border-left: "#31BAE9"
+    embed-resources: true
+    include-in-header: header.html
+    css:
+      - swart.css
+      - tachyons.min.css
+      - r-colors.css
+    fontsize: 18pt
+    lightbox: true
+    page-layout: full
+    fig-width: 12
+    fig-height: 10
+    fig-dpi: 300
+    html-math-method: katex
+    df-print: paged
+    toc: true
+    toc-float: true
+    citeproc: true
+    link-citations: true
+    linestretch: 1.0
+    
+    
+    
+  typst:
+    fig-width: 12
+    fig-height: 10
+    fig-dpi: 300
+    margin:
+      x: 1in
+      y: 1in
+    toc: true
+    fontsize: 14pt
+    mainfont: "Cabin"
+    
+  revealjs:
+    slide-number: true
+    transition: fade
+    code-overflow: wrap
+    center: true
+    smaller: true
+    scrollable: true
+    chalkboard: true
+    multiplex: false
+    theme: solarized
+    reference-location: margin
+    logo: img/red-cross-640-435.png
+    footer: "Footer text"
+    code-block-height: 650px
+
+
+
+  # docx:
+  #   highlight-style: github
+  #   fig_caption: true
+
+
+
+editor: source
+
+quarto:
+  render:
+    cache-refresh: true
+
+
+# for .qmd filesd
+execute:
+  echo: true
+  message: false
+  warning: false
+  eval: true
+  fig-width: 12
+  fig-height: 10
+
+
+# for .rmd files
+knitr:
+  opts_chunk:
+    echo: true
+    error: false
+    warning: false
+    message: false
+    cache: false
+
+```
+
+
+----
+
+<br>
+
+## Set ggplot theming and seed in setup chunk
+
+
+```markdown
+
+#| label: setup
+#| include: false
+
+# Prevent scientific notation globally
+options(scipen = 999)
+
+options(tigris_use_cache = TRUE)
+
+# install.packages(c("mapview", "survey", "srvyr", "arcgislayers"))
+
+# census_api_key("95496766c51541ee6f402c1e1a8658581285b759", install = TRUE, overwrite = TRUE)
+
+
+# load libraries
+
+# library(readxl)
+# library(writexl) 
+# library(tidyr) 
+# library(readr) 
+# library(purrr) 
+# library(stringr) 
+# library(forcats) 
+# library(lubridate) 
+# library(janitor) 
+# library(ggtext) 
+# library(paletteer) 
+# library(viridis) 
+# library(RColorBrewer) 
+# library(wesanderson) 
+# library(dutchmasters) 
+# library(gghighlight) 
+# library(monochromeR) 
+# library(ggforce) 
+# library(ggthemes)
+# library(gt)
+# library(gtExtras)
+# library(tidyverse)
+# library(plotly)
+# library(ggplot2)
+# library(tibble)
+# library(patchwork)
+# library(ppcor)
+# library(ggplot2)
+# library(corrplot)
+# library(ggcorrplot)
+# library(car)
+# library(WRS2)
+# library(boot)
+# library(BayesFactor)
+# library(pwr)
+# library(qgraph)
+# library(scales)
+# library(here)
+# library(ggdag)      # For plotting DAGs
+# library(dagitty)    # For working with DAG logic
+# library(DiagrammeR) # For complete control of the layout
+# library(knitr)      # For controlling rendering
+# library(kableExtra) # For tables summarizing results
+# library(DT)         # For rendering content that kableExtra cannot (symbols)
+# library(lavaan)     # For latent variable analysis
+# library(ggpubr)
+# library(rethinking)
+# library(broom)
+
+library(tidyverse)
+library(tidycensus)
+
+
+# Force dplyr's select to take precedence
+select <- dplyr::select
+filter <- dplyr::filter
+
+# Set global theme for consistent plots
+theme_set(theme_minimal(base_size = 20) + 
+          theme(
+    plot.title = element_text(face = "bold", size = 26),    # adjust title size
+    plot.subtitle = element_text(face = "bold", size = 24), # adjust subtitle size
+    axis.title.x = element_text(face = "bold", size = 22),
+    axis.title.y = element_text(face = "bold", size = 22),
+    axis.text.x = element_text(face = "bold", size = 22, angle = 45, hjust = 1),
+    legend.position = "bottom",
+    strip.text = element_text(face = "bold"),
+    panel.spacing.x = unit(1.5, "cm"),  # Horizontal spacing only
+    panel.spacing.y = unit(1.5, "cm"),   # Vertical spacing only
+    plot.margin = margin(20, 20, 20, 20, "pt")
+    )
+)
+
+
+# Set seed for reproducibility
+set.seed(123)
+
+```
+
+----
+
+<br>
+
+
+----
+
+<br>
+
+
+### .gitignore (a text file)
+
+```markdown
+
+# Current as of: 2025-08-11
+
+
+# Bookdown files-if book rendered in cloud uncomment these
+/*.pdf
+_site
+temp.Rmd
+*_files
+figures
+_main.*
+crc
+
+# History files
+.Rhistory
+.Rapp.history
+
+# Session Data files
+.RDataTmp
+
+# User-specific files
+.Ruserdata
+*.tobedeleted
+
+# Example code in package build process
+*-Ex.R
+
+# Output files from R CMD build
+/*.tar.gz
+
+# Output files from R CMD check
+/*.Rcheck/
+
+# RStudio files
+.Rproj.user/
+
+# OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
+.httr-oauth
+
+# knitr and R markdown default cache directories
+*_cache/      # knitr-style: document_cache/
+_cache/       # Some tools use exactly _cache/
+/cache/       # Root cache directory
+
+# Temporary files created by R markdown
+*.utf8.md
+*.knit.md
+
+# R Environment Variables
+.Renviron
+
+# pkgdown sites
+docs/
+
+# translation temp files
+po/*~
+
+# RStudio Connect folder
+rsconnect/
+.Rdata
+
+# Built vignettes
+inst/doc
+
+# Package metadata
+Meta/
+
+# R profile (local settings)
+.Rprofile
+
+# Package management
+renv/
+packrat/
+
+# Logs
+*.log
+
+
+# Large temporary data files
+temp-*.rds
+temp-*.RDS
+
+# Raw data (if large)
+data-raw/
+raw-data/
+
+# Auto-generated plots
+Rplots.pdf
+
+# Secrets/credentials
+.secrets/
+.env
+
+# macOS
+.DS_Store
+
+
+# Windows
+Thumbs.db
+
+# Quarto
+/.quarto/
+_freeze/
+
+
+
+# Rendered output (be selective)
+
+*.html
+!header.html
+!vignettes/*.html
+!giscus.html
+
+
+
+
+# ------------------------
+# Large data files (naming convention: large_*)
+# These are typically big temporary or downloaded datasets that should not be versioned
+large_*.rds
+large_*.RDS
+large_*.csv
+large_*.xlsx
+
+
+```
+
+
+----
+
+<br>
+
+### .Rbuildignore (a text file)
+
+```markdown
+
+# Current as of: 2025-08-11
+^.*\.Rproj$      # RStudio project files
+^\.Rproj\.user$  # RStudio user-specific settings
+^LICENSE\.md$    # LICENSE.md (keeping only LICENSE for CRAN)
+^README\.Rmd$    # Source file for README
+^\.github$       # GitHub Actions
+^_pkgdown\.yml$  # pkgdown config
+^docs$           # pkgdown site
+^data-raw$       # Raw data prep scripts
+^\.gitignore$    # Git files
+^\.gitattributes$
+^cran-comments\.md$  # CRAN submission notes
+^revdep$         # Reverse dependency checks
+^\.Rhistory$     # R history
+^\.RData$        # R data files
+
+
+```
+
+----
+<br>
+
+
+
+### .gitattributes (a text file)
+
+***Run this code BEFORE using .gitattributes:***
+
+```{r}
+
+# Check if Git LFS is installed
+# system("git lfs version")
+
+# If not installed, install it first, then:
+# usethis::use_git_lfs()
+
+```
+
+
+```markdown
+
+# Current as of: 2025-08-11
+
+# 1. Git LFS (Large File Storage)
+*.mov filter=lfs diff=lfs merge=lfs -text
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+*.avi filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs -text
+*.tar.gz filter=lfs diff=lfs merge=lfs -text
+
+# 2. GitHub Language Statistics (Linguist)
+# Mark vendored libraries (in libs/ folder)
+libs/**/*.css linguist-vendored=true
+libs/**/*.js linguist-vendored=true
+# Ensure R files are detected correctly
+*.R linguist-language=R
+*.Rmd linguist-language=RMarkdown
+*.qmd linguist-language=RMarkdown
+# Mark generated files
+*.html linguist-generated=true
+*_files/ linguist-generated=true
+docs/* linguist-documentation=true
+
+# 3. Line Ending Normalization
+# Force Unix line endings for code files
+*.R text eol=lf
+*.Rmd text eol=lf
+*.qmd text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.sh text eol=lf
+# Force Windows line endings for Windows-specific files
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# 4. Diff Behavior
+# Binary files - don't try to diff these
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.RData binary
+*.rds binary
+*.rda binary
+# Text files - ensure these are diffed as text
+*.csv text
+*.tsv text
+*.txt text
+
+# 5. Merge Strategies
+# Keep our version during merge conflicts
+DESCRIPTION merge=ours
+# Union merge for NAMESPACE (combine both versions)
+NAMESPACE merge=union
+
+# 6. Export Control (for releases/archives)
+# Don't include these in exported archives
+.gitignore export-ignore
+.gitattributes export-ignore
+.Rbuildignore export-ignore
+.github/ export-ignore
+tests/ export-ignore
+data-raw/ export-ignore
+README.Rmd export-ignore
+^.*\.Rproj$ export-ignore
+
+
+```
+
+
+
+
+
