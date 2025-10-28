@@ -90,7 +90,7 @@ quarto:
 
 # for .qmd filesd
 execute:
-  echo: true
+  echo: false
   message: false
   warning: false
   eval: true
@@ -101,7 +101,7 @@ execute:
 # for .rmd files
 knitr:
   opts_chunk:
-    echo: true
+    echo: false
     error: false
     warning: false
     message: false
@@ -177,7 +177,9 @@ options(tigris_use_cache = TRUE)
 
 library(tidyverse)
 library(tidycensus)
-
+library(scales)
+library(DT)
+library(ggplot2)
 
 # Force dplyr's select to take precedence
 select <- dplyr::select
@@ -301,7 +303,7 @@ quarto:
 
 # for .qmd filesd
 execute:
-  echo: true
+  echo: false
   message: false
   warning: false
   eval: true
@@ -312,7 +314,7 @@ execute:
 # for .rmd files
 knitr:
   opts_chunk:
-    echo: true
+    echo: false
     error: false
     warning: false
     message: false
