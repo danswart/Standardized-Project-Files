@@ -1,0 +1,57 @@
+---
+title: "Standardized ggtext Code"
+format: html
+---
+
+
+
+```{r}
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 20) + 
+                   ggplot2::theme(plot.title = ggtext::element_textbox_simple(face = "bold",
+                            color = "darkgreen",
+                            size = 26,
+                            fill = "yellow",
+                            lineheight = 1.0,
+                            padding =ggplot2::margin(5.5, 5.5, 0.0, 5.5),
+                            margin = ggplot2::margin(0, 0, 5.5, 0)
+                            ),
+                            plot.subtitle = ggtext::element_textbox_simple(
+                                 color = "darkgreen",
+                                 face = "bold",
+                                 fill = "yellow",
+                                 lineheight = 1.0,
+                                 padding = ggplot2::margin(0.0, 5.5, 5.5, 5.5),
+                                 margin = ggplot2::margin(0, 0, 5.5, 0)
+                                 ),
+                            plot.caption = ggtext::element_markdown(
+                                 color = "darkgreen",
+                                 face = "bold",
+                                 fill = "yellow",
+                                 lineheight = 1.0,
+                                 padding = ggplot2::margin(0.0, 5.5, 5.5, 5.5),
+                                 margin = ggplot2::margin(0, 0, 5.5, 0)
+                                 ),
+                                axis.title.x = ggtext::element_textbox_simple(face = "bold",
+                                  #                                      color = "blue",
+                                  #                                      size = 22),
+                                  # axis.title.y = ggtext::element_textbox_simple(face = "bold",
+                                  #                                      color = "blue",
+                                  #                                      size = 22),
+                                  # axis.text.x = ggtext::element_textbox_simple(face = "bold",
+                                  #                                     size = 22,
+                                  #                                     angle = 45,
+                                  #                                     hjust = 1),
+                                  # strip.text = ggplot2::element_richtext(face = "bold"),
+                                  legend.position = "bottom",
+                                  panel.spacing.x = grid::unit(1.5,
+                                                                "cm"),
+                                  panel.spacing.y = grid::unit(1.5,
+                                                                "cm"),
+                                  plot.margin = ggplot2::margin(20,
+                                                                 20,
+                                                                 20,
+                                                                 20,
+                                                                 "pt")))
+
+```
+
