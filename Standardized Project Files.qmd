@@ -64,6 +64,7 @@ format:
     fontsize: 16pt
     mainfont: "Cabin"
   
+
     
   revealjs:
     slide-number: true
@@ -159,6 +160,15 @@ flextable::set_flextable_defaults(
   decimal.mark = ",",
   big.mark = " ",
   na_str = "<na>"
+  # flextable::theme_alafoli()	|>  # BLAH
+  # flextable::theme_apa()  # THIS IS NICE
+  # flextable::theme_booktabs() |>  # NICE, MORE COMPACT
+  # flextable::theme_box() |>   # OK, INCLUDES CELL BORDERS
+  # flextable::theme_tron() |>  # 'DARK MODE' BLUE TEXT
+  # flextable::theme_tron_legacy() |>   # 'DARK MODE' YELLOW TEXT
+  # flextable::theme_vader() |>    # 'DARK MODE' WHITE TEXT
+  # flextable::theme_vanilla() |>   # NOT SPECIAL
+  # flextable::theme_zebra()	|>
   )
 
 
@@ -173,7 +183,7 @@ ggplot2::theme_set(
         color = "darkgreen",
         size = 22,
         fill = "yellow",
-        lineheight = 1.0,
+        lineheight = 1.2,
         padding = ggplot2::margin(5.5, 5.5, 0.0, 5.5),
         margin = ggplot2::margin(0, 0, 5.5, 0)
       ),
@@ -183,9 +193,9 @@ ggplot2::theme_set(
         face = "bold",
         size = 20,
         fill = "yellow",
-        lineheight = 1.0,
-        padding = ggplot2::margin(0.0, 5.5, 5.5, 5.5),
-        margin = ggplot2::margin(0, 0, 5.5, 0)
+        lineheight = 1.2,
+        padding = ggplot2::margin(5.5, 5.5, 5.5, 5.5),
+        margin = ggplot2::margin(10.5, 0, 5.5, 0)
       ),
       plot.caption = ggtext::element_markdown(
         family = "Cabin",
@@ -249,7 +259,7 @@ ggplot2::theme_set(
 
   
 # Set seed for reproducibility
-set.seed(123)
+base::set.seed(123)
 
 ```
 
@@ -325,6 +335,7 @@ format:
     fontsize: 16pt
     mainfont: "Cabin"
   
+
     
   revealjs:
     slide-number: true
@@ -422,6 +433,15 @@ flextable::set_flextable_defaults(
   decimal.mark = ",",
   big.mark = " ",
   na_str = "<na>"
+  # flextable::theme_alafoli()	|>  # BLAH
+  # flextable::theme_apa()  # THIS IS NICE
+  # flextable::theme_booktabs() |>  # NICE, MORE COMPACT
+  # flextable::theme_box() |>   # OK, INCLUDES CELL BORDERS
+  # flextable::theme_tron() |>  # 'DARK MODE' BLUE TEXT
+  # flextable::theme_tron_legacy() |>   # 'DARK MODE' YELLOW TEXT
+  # flextable::theme_vader() |>    # 'DARK MODE' WHITE TEXT
+  # flextable::theme_vanilla() |>   # NOT SPECIAL
+  # flextable::theme_zebra()	|>
   )
 
 
@@ -436,7 +456,7 @@ ggplot2::theme_set(
         color = "darkgreen",
         size = 22,
         fill = "yellow",
-        lineheight = 1.0,
+        lineheight = 1.2,
         padding = ggplot2::margin(5.5, 5.5, 0.0, 5.5),
         margin = ggplot2::margin(0, 0, 5.5, 0)
       ),
@@ -446,9 +466,9 @@ ggplot2::theme_set(
         face = "bold",
         size = 20,
         fill = "yellow",
-        lineheight = 1.0,
-        padding = ggplot2::margin(0.0, 5.5, 5.5, 5.5),
-        margin = ggplot2::margin(0, 0, 5.5, 0)
+        lineheight = 1.2,
+        padding = ggplot2::margin(5.5, 5.5, 5.5, 5.5),
+        margin = ggplot2::margin(10.5, 0, 5.5, 0)
       ),
       plot.caption = ggtext::element_markdown(
         family = "Cabin",
@@ -512,7 +532,8 @@ ggplot2::theme_set(
 
   
 # Set seed for reproducibility
-set.seed(123)
+base::set.seed(123)
+
 
 ```
 
