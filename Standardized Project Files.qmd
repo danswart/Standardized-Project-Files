@@ -145,6 +145,7 @@ options(qic.targetcol = "purple") # NO LONGER NEEDED; CHARTS ALL PREPARED WITH G
 options(DT.options = list(dom = 'pBlfrti')) # Add buttons, filtering, and top (t) pagination controls
 options(shiny.maxRequestSize = 50 * 1024^2) # Set upload maximum to 50 MB
 options(tigris_use_cache = TRUE)
+options(device = "RStudioGD") 
 
 
 # Flextable defaults:
@@ -773,6 +774,11 @@ temp-*.RDS
 # Raw data (if large)
 data-raw/
 raw-data/
+
+* Local RDS files
+data/*.rds
+*.rds
+
 
 # Auto-generated plots
 Rplots.pdf
