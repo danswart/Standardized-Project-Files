@@ -4,7 +4,6 @@ subtitle: ""
 description: ""
 authors: 
   - name: "Dan Swart, CPA (ret)"
-  - name: "Claude Sonnet 4.5"
 date: today
 date-format: long
 # bibliography: manual-refs.bib
@@ -23,7 +22,7 @@ format:
     code-overflow: wrap
     code-block-bg: "#FAEBD7"
     code-block-border-left: "#31BAE9"
-    embed-resources: false     # Fast for drafts. Override for sharing output
+    embed-resources: true     # Set to 'false' for drafts. Override if you're NOT sharing output
     include-in-header:
       - text: 
           <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
@@ -54,8 +53,8 @@ format:
     
     
   typst:
-    # fig-width: 13
-    E fig-height: 8
+    fig-width: 13
+    fig-height: 8
     fig-dpi: 300
     margin:
       x: 1in
@@ -116,6 +115,8 @@ knitr:
     cache: false
 
 
+params:
+  data_updated: !expr format(Sys.Date(), "%B %Y")
 ---
 
 
@@ -131,6 +132,7 @@ knitr:
 
 # # load libraries - NOT NEEDED
 
+source(here::here("R", "download_button_helpers.R"))
 
 # Force dplyr's select to take precedence
 select <- dplyr::select
@@ -190,7 +192,7 @@ ggplot2::theme_set(
         family = "Cabin",
         face = "bold",
         color = "darkgreen",
-        size = 16,
+        size = 28,
         fill = "yellow",
         lineheight = 0.9,
         padding = ggplot2::margin(5.5, 5.5, 0.0, 5.5),
@@ -200,7 +202,7 @@ ggplot2::theme_set(
         family = "Cabin",
         color = "darkgreen",
         face = "bold",
-        size = 14,
+        size = 22,
         fill = "yellow",
         lineheight = 0.9,
         padding = ggplot2::margin(5.5, 5.5, 5.5, 5.5),
@@ -208,7 +210,7 @@ ggplot2::theme_set(
       ),
       plot.caption = ggtext::element_markdown(
         family = "Cabin",
-        size = 14,
+        size = 18,
         hjust = 1,
         color = "darkblue",
         face = "italic",
@@ -219,7 +221,7 @@ ggplot2::theme_set(
         family = "Cabin",
         face = "bold",
         color = "blue",
-        size = 12,
+        size = 18,
         angle = 45,
         hjust = 1
       ),
@@ -228,13 +230,13 @@ ggplot2::theme_set(
         family = "Cabin",
         face = "bold",
         color = "blue",
-        size = 14),
+        size = 18),
         # ggplot2::element_blank(),
       axis.text.y = ggtext::element_markdown(
         family = "Cabin",
         face = "bold",
         color = "blue",
-        size = 12,
+        size = 18,
         angle = 45,
         hjust = 1
       ),
@@ -248,7 +250,7 @@ ggplot2::theme_set(
       strip.text = ggtext::element_markdown(
         family = "Cabin",
         color = "black",
-        size = 12,
+        size = 18,
         face = "italic",
         margin = ggplot2::margin(2, 0, 0.5, 0, "lines")
       ),
@@ -265,12 +267,27 @@ ggplot2::theme_set(
 )
 
 
-
+claude <- ellmer::chat_anthropic(model = "claude-opus-4-6-20260205")
   
 # Set seed for reproducibility
 base::set.seed(123)
 
 ```
+
+\
+
+#### **Filename:** 
+city_of_schertz_base_salary_vs_additional_earnings_fy20_fy25_for_
+directors_managers_and_public_safety_leaders_searchable_dt_tables_with_
+buttons.qmd
+
+\
+
+
+
+
+
+
 
 
 
