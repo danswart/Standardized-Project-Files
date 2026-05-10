@@ -114,7 +114,6 @@ knitr:
     message: false
     cache: false
 
-
 params:
   data_updated: !expr format(Sys.Date(), "%B %Y")
 ---
@@ -124,6 +123,16 @@ params:
 #| label: setup
 #| include: false
 
+# Capture current filename for use in document
+file_name <- if (!base::is.null(knitr::current_input())) {
+  paste0(tools::file_path_sans_ext(knitr::current_input()), ".qmd")
+} else {
+  "interactive_session.qmd"
+}
+
+file_stem <- tools::file_path_sans_ext(file_name)
+
+
 
 # install.packages(c("mapview", "survey", "srvyr", "arcgislayers"))
 
@@ -132,6 +141,8 @@ params:
 
 # # load libraries - NOT NEEDED
 
+# Download button helpers live here; knitr::is_html_output() guard is inside
+# the helpers so they silently no-op when rendering to typst
 source(here::here("R", "download_button_helpers.R"))
 
 # Force dplyr's select to take precedence
@@ -164,23 +175,30 @@ flextable::set_flextable_defaults(
   decimal.mark = ".",
   big.mark = " ",
   na_str = "<na>",
+  theme_fun = base::identity,          # <-- add this
   post_process_html = identity,
   post_process_docx = identity
 )
 
+# Standard table styler: blue italic title row + palegreen column header row.
+# Defined here so all QMDs that source this setup get the same presentation
+# without depending on census_helpers.R for a purely cosmetic function.
+ds_style_flextable <- function(ft, title = NULL) {
+  if (!base::is.null(title)) {
+    ft <- flextable::add_header_lines(ft, values = title)
+    ft <- flextable::color(ft, i = 1, part = "header", color = "blue")
+    ft <- flextable::italic(ft, i = 1, part = "header")
+    ft <- flextable::align(ft, i = 1, part = "header", align = "left")
+    ft <- flextable::fontsize(ft, i = 1, part = "header", size = 12)
+    ft <- flextable::bg(ft, i = 1, part = "header", bg = "white")
+    ft <- flextable::bg(ft, i = 2, part = "header", bg = "palegreen")
+  } else {
+    ft <- flextable::bg(ft, i = 1, part = "header", bg = "palegreen")
+  }
+  ft <- flextable::autofit(ft)
+  ft
+}
 
-
-# Flextable built-in themes:
-  # flextable::theme_alafoli()	|>  # BLAH
-  # flextable::theme_apa()  # THIS IS NICE
-  # flextable::theme_booktabs() |>  # NICE, MORE COMPACT
-  # flextable::theme_box() |>   # OK, INCLUDES CELL BORDERS
-  # flextable::theme_tron() |>  # 'DARK MODE' BLUE TEXT
-  # flextable::theme_tron_legacy() |>   # 'DARK MODE' YELLOW TEXT
-  # flextable::theme_vader() |>    # 'DARK MODE' WHITE TEXT
-  # flextable::theme_vanilla() |>   # NOT SPECIAL
-  # flextable::theme_zebra()	|>
-  #
 
 
 # Set global theme for consistent plots
@@ -267,25 +285,29 @@ ggplot2::theme_set(
 )
 
 
-claude <- ellmer::chat_anthropic(model = "claude-opus-4-6-20260205")
+# claude <- ellmer::chat_anthropic(model = "claude-opus-4-6-20260205")
   
 # Set seed for reproducibility
 base::set.seed(123)
 
 ```
 
-\
-
-#### **Filename:** 
-city_of_schertz_base_salary_vs_additional_earnings_fy20_fy25_for_
-directors_managers_and_public_safety_leaders_searchable_dt_tables_with_
-buttons.qmd
 
 \
 
+#### **Filename:**
 
+::: {.content-visible when-format="html"}
+[`r file_name`]{style="word-break: break-all; font-size: 1.00em;"}
+:::
 
+```{=typst}
+#let wrap_underscores(s) = s.replace("_", "_\u{200B}")
+#text(size: 16pt)[#raw(wrap_underscores("`r file_name`"))]
+```
 
+\
+\
 
 
 

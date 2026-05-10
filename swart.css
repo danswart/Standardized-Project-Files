@@ -1,4 +1,4 @@
-/* Current as of: 2025-08-25 */
+/* Current as of: 2026-05-08 */
 
 
 
@@ -19,14 +19,24 @@
 /* This must remain at the top of this file.                 */
 
 /* Fonts */
-/* @import url('https://fonts.googleapis.com/css2?family=Schoolbell'); */
-/* @import url('https://fonts.googleapis.com/css2?family=Lato'); */
-/* @import url('https://fonts.googleapis.com/css2?family=Fira+Mono'); */
-/* @import url('https://fonts.googleapis.com/css2?family=Montserrat'); */
-/* @import url('https://fonts.googleapis.com/css2?family=Cabin'); */
-/* @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab'); */
+@import url('https://fonts.googleapis.com/css2?family=Lato');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat');
+@import url('https://fonts.googleapis.com/css2?family=Cabin');         /* swart */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab');   /* swart */
+@import url('https://fonts.googleapis.com/css2?family=Schoolbell');    /* swart */
 
 
+/* ── Syntax token overrides for light code backgrounds ───────────── */
+
+code span.dv { color: #005cc5; }   /* decimal integers:  0, 1, 42    */
+code span.fl { color: #005cc5; }   /* floats:  0.947, 3.14           */
+code span.co { color: #6a737d; font-style: italic; }  /* # comments  */
+code span.st { color: #032f62; }   /* "strings"                       */
+code span.kw { color: #d73a49; font-weight: bold; }   /* TRUE FALSE NA */
+code span.fu { color: #6f42c1; }   /* function names                  */
+code span.op { color: #24292e; }   /* operators  <- | + ~ ::         */
+code span.sc { color: #24292e; }   /* special chars                   */
 
 .table {
   width: 100%;
