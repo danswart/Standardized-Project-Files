@@ -1,4 +1,4 @@
-/* Current as of: 2026-05-08 */
+/* Current as of: 2026-07-15 */
 
 
 
@@ -12,8 +12,7 @@
    Distill theme. Only edit values in the right column
    for each row; values shown are the CSS defaults.
    To return any property to the default,
-   you may set its value to: unset
-   All rows must end with a semi-colon.                      */
+   you may set its value to: unset                          */
 
 /* Optional: embed custom fonts here with `@import`          */
 /* This must remain at the top of this file.                 */
@@ -70,6 +69,18 @@ figure {
   border-width: 4px;
   border-radius: 10px;
 /*  background-color: #f8f9fa;  background colors set below for each callout */
+}
+
+
+/* Default Markdown blockquotes */
+
+blockquote {
+  border-left: 4px solid orange;
+  padding-left: 1em;
+}
+
+blockquote p {
+  color: blue;
 }
 
 
@@ -1457,4 +1468,3 @@ h5 {
   max-width: 400px; /* Adjust the maximum width as needed */
   max-height: 300px; /* Adjust the maximum height as needed */
 }
-

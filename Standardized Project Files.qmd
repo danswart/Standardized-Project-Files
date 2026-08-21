@@ -134,32 +134,27 @@ file_stem <- tools::file_path_sans_ext(file_name)
 
 
 
-# install.packages(c("mapview", "survey", "srvyr", "arcgislayers"))
+# Download button helpers live here; knitr::is_html_output() guard is inside the helpers so they silently no-op when rendering to typst
 
-# census_api_key("95496766c51541ee6f402c1e1a8658581285b759", install = TRUE, overwrite = TRUE)
+# source(here::here("R", "download_button_helpers.R"))
 
-
-# # load libraries - NOT NEEDED
-
-# Download button helpers live here; knitr::is_html_output() guard is inside
-# the helpers so they silently no-op when rendering to typst
-source(here::here("R", "download_button_helpers.R"))
-
-# Force dplyr's select to take precedence
-select <- dplyr::select
-filter <- dplyr::filter
 
 # Options
 options(scipen = 999)
-options(qic.clshade = T) # NO LONGER NEEDED; CHARTS ALL PREPARED WITH GGPLOT2 ONLY
-options(qic.linecol = 'black') # NO LONGER NEEDED; CHARTS ALL PREPARED WITH GGPLOT2 ONLY
-options(qic.signalcol = "firebrick") # NO LONGER NEEDED; CHARTS ALL PREPARED WITH GGPLOT2 ONLY
-options(qic.targetcol = "purple") # NO LONGER NEEDED; CHARTS ALL PREPARED WITH GGPLOT2 ONLY
 options(DT.options = list(dom = 'pBlfrti')) # Add buttons, filtering, and top (t) pagination controls
 options(shiny.maxRequestSize = 50 * 1024^2) # Set upload maximum to 50 MB
 options(tigris_use_cache = TRUE)
 options(device = "RStudioGD") 
 
+# Set seed for reproducibility
+base::set.seed(123)
+
+```
+
+
+```{r}
+#| label: styling
+#| include: false
 
 # Flextable defaults:
 flextable::set_flextable_defaults(
@@ -284,11 +279,9 @@ ggplot2::theme_set(
     )
 )
 
+```
 
-# claude <- ellmer::chat_anthropic(model = "claude-opus-4-6-20260205")
-  
-# Set seed for reproducibility
-base::set.seed(123)
+
 
 ```
 
